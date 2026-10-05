@@ -1,0 +1,16 @@
+app:
+  name: conv-app
+  image: antonlarichev/conv-app
+  components: conv-app
+  replicas: 1
+  port: 80
+  version: v1.4
+  limits:
+    memory: "500Mi"
+    cpu: "200m"
+ingress:
+  name: myingress
+  host: conv.test
+api:
+  name: conv-api
+  port: 3000
