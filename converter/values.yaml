@@ -51,3 +51,14 @@ amqp:
   user: demo
   password: demo
   queue: converter
+
+converter:
+  name: converter
+  image: antonlarichev/conv-service
+  version: 1.0
+  components: converter
+  replicas: 1
+  port: 80
+  limits:
+    memory: "500Mi"
+    cpu: "200m"
