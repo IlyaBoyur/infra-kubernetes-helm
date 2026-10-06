@@ -1,0 +1,23 @@
+{{- define "liveprobe.template" }}
+exec:
+  command:
+    - curl
+    # меняет статус ответа программы на 1 (т.е. статус ошибки), если есть ошибка в HTTP статусе. Без этого флага ответ со статусом 404 Not found не будет считаться ошибкой пробирования
+    - --fail
+    - {{ printf "http://localhost:%d/api" (.port| int64) | quote }}
+# задержка перед первой пробой 
+initialDelaySeconds: 30
+# периодичность пробирования, в секундах
+periodSeconds: 5
+# количество ошибок до рестарта Pod
+failureThreshold: 1
+{{- end }}
+
+
+{{- define "env.template" }}
+- name: {{ .env }}
+  valueFrom:
+    secretKeyRef:
+      name: "{{ .name }}-secret"
+      key: {{ .env }}
+{{- end }}
