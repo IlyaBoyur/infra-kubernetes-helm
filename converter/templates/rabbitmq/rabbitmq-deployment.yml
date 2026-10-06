@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.rabbitmq.name }}-deployment
+spec:
+  replicas: {{ .Values.rabbitmq.replicas }}
+  selector:
+    matchLabels:
+      components: {{ .Values.rabbitmq.components }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 10%
+  template:
+    metadata:
+      name: {{ .Values.rabbitmq.name }}
+      labels:
+        components: {{ .Values.rabbitmq.components }}
+    spec:
+      containers:
+      - name: {{ .Values.rabbitmq.name }}
+        # указываем версию явно, чтобы избежать проблем совместимости в будущем
+        image: rabbitmq:3.12.7-alpine
+        ports:
+          - containerPort: {{ .Values.rabbitmq.port }}
+        env:
+          {{- range .Values.rabbitmq.envs }}
+          {{- $data := dict "name" $.Values.rabbitmq.name "env" . }}
+          {{- include "env.template" $data | indent 12}}
+          {{- end}}
+        resources:
+          limits: {{ .Values.app.limits | toYaml | nindent 14  }}
+          
+        volumeMounts:
+          - name: {{ .Values.rabbitmq.name }}-data
+            mountPath: /var/lib/rabbitmq
+            subPath: rabbitmq
+      volumes:
+        - name: {{ .Values.rabbitmq.name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.rabbitmq.name }}-pvc

@@ -34,7 +34,17 @@ api:
 
 rabbitmq:
   name: rabbitmq
-  port: 3000
+  image: rabbitmq
+  version: 3.12.7-alpine
+  components: rabbitmq
+  replicas: 1
+  port: 5672
+  envs:
+    - RABBITMQ_DEFAULT_USER
+    - RABBITMQ_DEFAULT_PASSWORD
+  limits:
+    memory: "500Mi"
+    cpu: "200m"
 
 amqp:
   exchange: demo
