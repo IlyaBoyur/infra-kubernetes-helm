@@ -1,7 +1,7 @@
 app:
   name: conv-app
   image: antonlarichev/conv-app
-  version: v1.4
+  version: "1.2"
   components: conv-app
   replicas: 1
   port: 80
@@ -45,12 +45,6 @@ rabbitmq:
   limits:
     memory: "500Mi"
     cpu: "200m"
-
-amqp:
-  exchange: demo
-  user: demo
-  password: demo
-  queue: converter
 
 converter:
   name: converter

@@ -30,8 +30,6 @@ spec:
             {{- $data := dict "name" $.Values.api.name "env" . }}
             {{- include "env.template" $data | indent 12}}
             {{- end}}
-          livenessProbe:
-            {{- include "liveprobe.template" .Values.api | indent 12 }}
           resources:
             limits: {{ .Values.api.limits | toYaml | nindent 14  }}
           volumeMounts:
