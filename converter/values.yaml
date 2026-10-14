@@ -41,7 +41,7 @@ rabbitmq:
   port: 5672
   envs:
     - RABBITMQ_DEFAULT_USER
-    - RABBITMQ_DEFAULT_PASSWORD
+    - RABBITMQ_DEFAULT_PASS
   limits:
     memory: "500Mi"
     cpu: "200m"
