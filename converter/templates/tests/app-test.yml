@@ -11,7 +11,7 @@ metadata:
 spec:
   containers:
     - name: wget
-      image: busybox
+      image: busybox:1.38
       command: ['wget']
-      args: ['{{ .Values.app.name }}-clusterip:{{ .Values.app.port }}']
+      args: ['{{ .Values.app.name }}-clusterip:{{ .Values.app.port }}/']
   restartPolicy: Never
