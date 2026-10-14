@@ -30,7 +30,7 @@ spec:
           {{- include "env.template" $data | indent 12}}
           {{- end}}
         resources:
-          limits: {{ .Values.app.limits | toYaml | nindent 14  }}
+          limits: {{ .Values.rabbitmq.limits | toYaml | nindent 14  }}
           
         volumeMounts:
           - name: {{ .Values.rabbitmq.name }}-data
