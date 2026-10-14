@@ -46,12 +46,6 @@ rabbitmq:
     memory: "500Mi"
     cpu: "200m"
 
-amqp:
-  exchange: demo
-  user: demo
-  password: demo
-  queue: converter
-
 converter:
   name: converter
   image: antonlarichev/conv-service
