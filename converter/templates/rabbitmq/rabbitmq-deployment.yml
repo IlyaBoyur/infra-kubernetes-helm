@@ -21,7 +21,7 @@ spec:
       containers:
       - name: {{ .Values.rabbitmq.name }}
         # указываем версию явно, чтобы избежать проблем совместимости в будущем
-        image: rabbitmq:3.12.7-alpine
+        image: "{{ .Values.rabbitmq.image }}:{{ .Values.rabbitmq.version }}"
         ports:
           - containerPort: {{ .Values.rabbitmq.port }}
         env:
