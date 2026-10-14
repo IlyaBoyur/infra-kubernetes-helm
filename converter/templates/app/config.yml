@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.app.name }}-config
 data:
-  VITE_DOMAIN: ""
+  VITE_DOMAIN: {{ .Values.app.config.viteDomain | quote }}

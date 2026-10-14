@@ -8,6 +8,8 @@ app:
   limits:
     memory: "500Mi"
     cpu: "200m"
+  config:
+    viteDomain: ""
 ingress:
   name: myingress
   host: conv.test
