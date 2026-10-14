@@ -37,7 +37,7 @@ spec:
           volumeMounts:
             - name: {{ .Values.api.name }}-data
               mountPath: /opt/app/uploads
-    volumes:
-      - name: {{ .Values.api.name }}-data
-        persistentVolumeClaim:
-          claimName: {{ .Values.api.name }}-pvc
+      volumes:
+        - name: {{ .Values.api.name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.api.name }}-pvc

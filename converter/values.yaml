@@ -55,7 +55,7 @@ amqp:
 converter:
   name: converter
   image: antonlarichev/conv-service
-  version: 1.0
+  version: "1.0"
   components: converter
   replicas: 1
   port: 80
