@@ -36,6 +36,8 @@ spec:
                   key: VITE_DOMAIN
           livenessProbe:
             {{- include "app.liveprobe.template" .Values.app | indent 12 }}
+          readinessProbe:
+            {{- include "app.liveprobe.template" .Values.app | indent 12 }}           
           # ограничения Pod по ресурсам
           resources:
             limits: {{ .Values.app.limits | toYaml | nindent 14  }}
