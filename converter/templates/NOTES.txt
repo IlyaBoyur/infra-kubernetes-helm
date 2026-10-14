@@ -1,1 +1,6 @@
 Вы успешно установили приложение {{ .Release.Name }}:{{ .Chart.Version }}
+
+Адрес приложения: http://{{ .Values.ingress.host }}
+
+Запуск тестов: helm test {{ .Release.Name }}
+
