@@ -1,18 +1,64 @@
 app:
   name: conv-app
   image: antonlarichev/conv-app
+  version: v1.4
   components: conv-app
   replicas: 1
   port: 80
-  version: v1.4
   limits:
     memory: "500Mi"
     cpu: "200m"
   config:
     viteDomain: ""
+
 ingress:
   name: myingress
   host: conv.test
+
 api:
   name: conv-api
+  image: antonlarichev/conv-api
+  version: "1.0"
+  components: conv-api
+  replicas: 1
   port: 3000
+  limits:
+    memory: "250Mi"
+    cpu: "200m"
+  envs:
+    - AMQP_EXCHANGE
+    - AMQP_USER
+    - AMQP_PASSWORD
+    - AMQP_HOSTNAME
+    - AMQP_QUEUE
+
+rabbitmq:
+  name: rabbitmq
+  image: rabbitmq
+  version: 3.12.7-alpine
+  components: rabbitmq
+  replicas: 1
+  port: 5672
+  envs:
+    - RABBITMQ_DEFAULT_USER
+    - RABBITMQ_DEFAULT_PASS
+  limits:
+    memory: "500Mi"
+    cpu: "200m"
+
+amqp:
+  exchange: demo
+  user: demo
+  password: demo
+  queue: converter
+
+converter:
+  name: converter
+  image: antonlarichev/conv-service
+  version: "1.0"
+  components: converter
+  replicas: 1
+  port: 80
+  limits:
+    memory: "500Mi"
+    cpu: "200m"
