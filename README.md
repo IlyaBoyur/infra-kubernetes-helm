@@ -3,9 +3,9 @@
 Сервис конвертации изображений: позволяет изменить размеры и расширение
 
 
-## Установить Helm Chart
+## Установить Helm Chart с секретами
 ```bash
-helm install converter-release converter/
+helm secrets install converter-release ./converter/ -f ./converter/secrets.yml
 ```
 
 
